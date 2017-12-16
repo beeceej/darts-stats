@@ -1,11 +1,12 @@
 module State.App exposing (..)
 
-import Messages.Messages as Messages exposing (StateMessage)
-import State.Model.Player as Player
+import Messages.Messages as Messages exposing (..)
+
+import State.PlayerStats as PlayerStats exposing (PlayerStats)
 
 type alias State = 
   { currentView : ViewType
-  ,  players : List Player.Player
+  ,  players : PlayerStats
   }
 
 type ViewType =
@@ -13,19 +14,19 @@ type ViewType =
   | ByGameType
   | ByAggregate
 
-updateCurrentView : StateMessage -> State -> State
+updateCurrentView : Msg -> State -> State
 updateCurrentView msg app =
   case msg of
-      Messages.ToPlayerView -> { currentView = ByPlayer, players = app.players }
-      Messages.ToGameTypeView -> { currentView = ByGameType, players = app.players }
-      Messages.ToAggregateView -> { currentView = ByAggregate, players = app.players }
-
+      ToPlayerView -> { currentView = ByPlayer, players = app.players }
+      ToGameTypeView -> { currentView = ByGameType, players = app.players }
+      ToAggregateView -> { currentView = ByAggregate, players = app.players }
+      NoOp -> app
 
 init : State
 init = 
   {
     currentView = ByPlayer
-  , players = Player.bigListOfUsers
+  , players = PlayerStats.initList 100
   }
 
   

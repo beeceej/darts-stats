@@ -1,4 +1,6 @@
-module State.Model.CricketStats exposing (..)
+module State.CricketStats exposing (..)
+
+{-- Unimplemented for now --}
 
 type alias CricketStats = 
   {

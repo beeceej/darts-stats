@@ -1,6 +1,6 @@
 module Messages.Messages exposing (..)
-
-type StateMessage = 
+type Msg = 
   ToPlayerView 
   | ToGameTypeView 
   | ToAggregateView
+  | NoOp

@@ -1,5 +1,4 @@
-module Api.Env exposing (..)
-
+module Api.Env exposing (Env)
 type Env 
   = DEV 
   | PROD

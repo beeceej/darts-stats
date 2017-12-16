@@ -1,14 +1,11 @@
-module View.View exposing (..)
+module View.View exposing (render)
 
 import Html exposing (Html, button, div, text, ul, li, span)
 import Html.Events exposing (onClick)
-import View.Constants as Const exposing  (..)
 import Messages.Messages as Messages exposing (..)
 import State.App as App exposing (..)
 import View.Player as PlayerView exposing (..)
 
-
-type alias Msg = Messages.StateMessage
 
 render : App.State -> Html Msg
 render model =
@@ -32,9 +29,9 @@ renderByAggregateView model =
 renderContainer : App.State -> Html Msg
 renderContainer model = 
   div []
-    [ button [ onClick ToPlayerView ] [ Const.playerViewText ]
-    , button [ onClick ToGameTypeView ] [ Const.gameViewText ]
-    , button [ onClick ToAggregateView ] [ Const.aggregateViewText ]
+    [ button [ onClick ToPlayerView ] [ text "Player View" ]
+    , button [ onClick ToGameTypeView ] [ text "Game View" ]
+    , button [ onClick ToAggregateView ] [ text "Aggregate View" ]
     , renderData model
     ]
 
@@ -42,5 +39,5 @@ renderData : App.State -> Html Msg
 renderData model = 
   div [] [ 
     text (toString model.currentView)
-  , div [] (List.map (PlayerView.renderStatsForPlayer) model.players)
+  , div [] (List.map (PlayerView.render) model.players)
   ]
