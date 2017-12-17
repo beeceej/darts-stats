@@ -3,4 +3,6 @@ type Msg =
   ToPlayerView 
   | ToGameTypeView 
   | ToAggregateView
+  | PrevPlayer
+  | NextPlayer
   | NoOp

@@ -15,16 +15,18 @@ render model =
     ByAggregate -> renderByAggregateView model
 
 renderByGameView : App.State -> Html Msg
-renderByGameView model = 
-  renderContainer model
+renderByGameView model = renderContainer model
 
 renderByPlayerView : App.State -> Html Msg
 renderByPlayerView model = 
-  renderContainer model
+  div [] [
+    (renderContainer model)
+  , div [] (List.map PlayerView.render model.players)
+  ]
+
 
 renderByAggregateView : App.State -> Html Msg
-renderByAggregateView model = 
-  renderContainer model
+renderByAggregateView model = renderContainer model
 
 renderContainer : App.State -> Html Msg
 renderContainer model = 
@@ -32,6 +34,8 @@ renderContainer model =
     [ button [ onClick ToPlayerView ] [ text "Player View" ]
     , button [ onClick ToGameTypeView ] [ text "Game View" ]
     , button [ onClick ToAggregateView ] [ text "Aggregate View" ]
+    , button [ onClick PrevPlayer ] [ text "Aggregate View" ]
+    , button [ onClick NextPlayer ] [ text "Aggregate View" ]
     , renderData model
     ]
 

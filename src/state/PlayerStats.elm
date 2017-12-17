@@ -1,6 +1,7 @@
 module State.PlayerStats exposing (PlayerStats, PlayerStat, init, initList)
 
 import State.StandardStats as StdStats exposing (..)
+import Array
 
 type alias PlayerStat =
   {
@@ -16,10 +17,22 @@ type alias PlayerStat =
 
 type alias PlayerStats = List PlayerStat
 
+getNth : PlayerStats -> Int -> PlayerStats
+getNth p n =
+  case List.length p < n of
+    True -> 
+      case Array.get (n - (List.length p)) (Array.fromList p) of
+        Nothing ->  []
+        Just val -> [val]
+    False -> 
+      case Array.get n (Array.fromList p) of
+          Nothing -> []
+          Just val -> [val]
+      
 init : PlayerStat
 init = 
   {  id = ""
-  , playerName = ""
+  , playerName = "Empty"
   , elo = 0
   , games = 0
   , wins = 0
@@ -31,3 +44,7 @@ init =
 initList : Int -> PlayerStats
 initList n =
   List.repeat n init
+
+
+test : List -> List
+test = List.

@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (Html)
-import State.App as App exposing (..)
+import State.App as App exposing (updateView, init)
 import Messages.Messages as Messages exposing (..)
 import View.View as View exposing (..)
 
@@ -19,9 +19,11 @@ model = App.init
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    ToPlayerView -> updateCurrentView ToPlayerView model
-    ToGameTypeView -> updateCurrentView ToGameTypeView model
-    ToAggregateView -> updateCurrentView ToAggregateView model
+    ToPlayerView -> updateView ToPlayerView model
+    ToGameTypeView -> updateView ToGameTypeView model
+    ToAggregateView -> updateView ToAggregateView model
+    PrevPlayer -> updateView ToAggregateView model
+    NextPlayer -> updateView ToAggregateView model
     NoOp -> model
     
 -- VIEW

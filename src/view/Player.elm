@@ -6,6 +6,10 @@ import Messages.Messages exposing (Msg)
 
 render : PlayerStatsModel.PlayerStat -> Html Msg
 render m =
-  div [] []
+  renderPlayerStats m
 
+
+renderPlayerStats : PlayerStatsModel.PlayerStat -> Html Msg 
+renderPlayerStats m = 
+  h2 [] [text m.playerName]
 {-- Private Rendering... --}
