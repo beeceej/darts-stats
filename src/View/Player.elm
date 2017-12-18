@@ -1,15 +1,24 @@
-module View.Player exposing (render)
+module View.Player exposing (render, renderStats)
 
-import Html exposing (Html, button, div, text, ul, li, span, h1, h2)
-import State.PlayerStats as PlayerStatsModel exposing (PlayerStats, PlayerStat, init, initList)
-import Messages.Messages exposing (Msg)
+import Html exposing (Html, text, li, a, button, div)
+import Html.Events exposing (onClick)
+import State.Player as Player exposing (Stats, init, initList, findById)
+import State.Messages exposing (Msg(..))
 
 
-render : PlayerStatsModel.PlayerStat -> Html Msg
+render : Player.Stats -> Html Msg
 render m =
     renderPlayerStats m
 
 
-renderPlayerStats : PlayerStatsModel.PlayerStat -> Html Msg
+renderPlayerStats : Player.Stats -> Html Msg
 renderPlayerStats m =
-    h2 [] [ text m.playerName ]
+    button []
+        [ a [ onClick (ShowPlayer m.id) ] [ text m.id ]
+        ]
+
+renderStats : Player.Stats -> Html Msg
+renderStats p = 
+    div []
+    [ text (toString p)
+    ]

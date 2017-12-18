@@ -2,9 +2,11 @@ module View.View exposing (render)
 
 import Html exposing (Html, button, div, text, ul, li, span)
 import Html.Events exposing (onClick)
-import Messages.Messages as Messages exposing (..)
+import State.Messages as Messages exposing (Msg(..))
+
 import State.App as App exposing (..)
 import View.Player as PlayerView exposing (..)
+import State.Player as PlayerState exposing(..)
 
 
 render : App.State -> Html Msg
@@ -26,10 +28,11 @@ renderByGameView model =
 
 
 renderByPlayerView : App.State -> Html Msg
-renderByPlayerView model =
+renderByPlayerView m =
     div []
-        [ (renderContainer model)
-        , div [] (List.map PlayerView.render model.players)
+        [ (renderContainer m)
+        , div [] (List.map PlayerView.render m.players)
+        , PlayerView.renderStats (PlayerState.findById m.currentPlayer m.players)
         ]
 
 
@@ -44,8 +47,6 @@ renderContainer model =
         [ button [ onClick ToPlayerView ] [ text "Player View" ]
         , button [ onClick ToGameTypeView ] [ text "Game View" ]
         , button [ onClick ToAggregateView ] [ text "Aggregate View" ]
-        , button [ onClick PrevPlayer ] [ text "Aggregate View" ]
-        , button [ onClick NextPlayer ] [ text "Aggregate View" ]
         , renderData model
         ]
 

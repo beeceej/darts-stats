@@ -1,10 +1,9 @@
-module Messages.Messages exposing (..)
+module State.Messages exposing (Msg(..))
 
 
 type Msg
     = ToPlayerView
     | ToGameTypeView
     | ToAggregateView
-    | PrevPlayer
-    | NextPlayer
+    | ShowPlayer String
     | NoOp
